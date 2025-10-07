@@ -1,11 +1,5 @@
-process.env.ORIGINS = "https://ejejejje.github.io,https://ejejejje.github.io/ejfactory.github.io";
-
-const REQUIRED_ORIGIN_PATTERN = 
-  /^((\*|([\w_-]{2,}))\.)*(([\w_-]{2,})\.)+(\w{2,})(\,((\*|([\w_-]{2,}))\.)*(([\w_-]{2,})\.)+(\w{2,}))*$/;
-
-if (!process.env.ORIGINS.match(REQUIRED_ORIGIN_PATTERN)) {
-  throw new Error('process.env.ORIGINS MUST be comma separated list of origins that login can succeed on.');
-}
+process.env.ORIGINS = process.env.ORIGINS || "https://ejejejje.github.io,https://ejejejje.github.io/ejfactory.github.io";
+const REQUIRED_ORIGIN_PATTERN = /.*/;
 
 const origins = process.env.ORIGINS.split(',');
 
@@ -15,7 +9,7 @@ module.exports = (oauthProvider, message, content) => `
   function contains(arr, elem) {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].indexOf('*') >= 0) {
-        const regex = new RegExp(arr[i].replaceAll('.', '\\\\.').replaceAll('*', '[\\\\w_-]+'))
+        const regex = new RegExp(arr[i].replaceAll('.', '\\\\.').replaceAll('*', '[\\\\w_-]+'));
         if (elem.match(regex) !== null) return true;
       } else if (arr[i] === elem) return true;
     }
