@@ -5,6 +5,11 @@ const oauthProvider = process.env.OAUTH_PROVIDER || 'github'
 const loginAuthTarget = process.env.AUTH_TARGET || '_self'
 process.env.ORIGINS = "https://ejejejje.github.io,https://ejejejje.github.io/ejfactory.github.io";
 
+const REQUIRED_ORIGIN_PATTERN = ...
+if (!process.env.ORIGINS.match(REQUIRED_ORIGIN_PATTERN)) {
+  throw new Error('process.env.ORIGINS MUST be comma separated list of origins that login can succeed on.');
+}
+
 const config = {
   client: {
     id: process.env.OAUTH_CLIENT_ID,
