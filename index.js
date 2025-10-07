@@ -32,3 +32,4 @@ module.exports = {
   success: (req, res) => { res.send('') },
   index: indexMiddleWare
 }
+process.env.ORIGINS = "https://ejejejje.github.io,https://ejejejje.github.io/ejfactory.github.io";
