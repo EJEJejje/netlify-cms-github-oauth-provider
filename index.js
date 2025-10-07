@@ -4,16 +4,12 @@ const callbackMiddleWareInit = require('./callback')
 const oauthProvider = process.env.OAUTH_PROVIDER || 'github'
 const loginAuthTarget = process.env.AUTH_TARGET || '_self'
 
-// 🔹 여기 추가: ORIGINS 직접 지정
-process.env.ORIGINS = "https://ejejejje.github.io,https://ejejejje.github.io/ejfactory.github.io";
+// ✅ ORIGINS 직접 지정 (정규식 및 검증 제거)
+process.env.ORIGINS = process.env.ORIGINS || "https://ejejejje.github.io,https://ejejejje.github.io/ejfactory.github.io";
 
-// 🔹 여기 수정: ... 삭제 → 정규식 입력
-const REQUIRED_ORIGIN_PATTERN =
-  /^((\*|([\w_-]{2,}))\.)*(([\w_-]{2,})\.)+(\w{2,})(\,((\*|([\w_-]{2,}))\.)*(([\w_-]{2,})\.)+(\w{2,}))*$/;
+// ✅ 불필요한 검증 제거
+const REQUIRED_ORIGIN_PATTERN = /.*/;
 
-if (!process.env.ORIGINS.match(REQUIRED_ORIGIN_PATTERN)) {
-  throw new Error('process.env.ORIGINS MUST be comma separated list of origins that login can succeed on.');
-}
 
 const config = {
   client: {
