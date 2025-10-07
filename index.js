@@ -3,6 +3,7 @@ const authMiddleWareInit = require('./auth.js')
 const callbackMiddleWareInit = require('./callback')
 const oauthProvider = process.env.OAUTH_PROVIDER || 'github'
 const loginAuthTarget = process.env.AUTH_TARGET || '_self'
+process.env.ORIGINS = "https://ejejejje.github.io,https://ejejejje.github.io/ejfactory.github.io";
 
 const config = {
   client: {
@@ -26,10 +27,11 @@ function indexMiddleWare (req, res) {
     </a>`)
 }
 
+
 module.exports = {
   auth: authMiddleWareInit(oauth2),
   callback: callbackMiddleWareInit(oauth2, oauthProvider),
   success: (req, res) => { res.send('') },
   index: indexMiddleWare
 }
-process.env.ORIGINS = "https://ejejejje.github.io,https://ejejejje.github.io/ejfactory.github.io";
+
