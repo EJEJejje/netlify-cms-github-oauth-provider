@@ -1,4 +1,4 @@
-process.env.ORIGINS = "https://ejejejje.github.io,https://ejejejje.github.io/ejfactory.github.io";
+
 
 const REQUIRED_ORIGIN_PATTERN = /^https:\/\/.*/;
 if (!process.env.ORIGINS.match(REQUIRED_ORIGIN_PATTERN)) {
